@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text to Speech</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="animate-zoom-in">Text to Speech Converter</h1>
+      <p class="animate-fade-in">Convert your thoughts to voice, instantly.</p>
+      <a href="#mainApp" class="hero-button animate-bounce">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Main App Section -->
+  <section id="mainApp">
+    <div class="app-container">
+      <h2>Text to Speech</h2>
+      <textarea id="textInput" placeholder="Start typing..."></textarea>
+
+      <div class="controls">
+        <label for="voiceSelect">Choose voice:</label>
+        <!-- show 6 voices at once, larger text -->
+        <select id="voiceSelect" class="voice-select" size="6"></select>
+
+        <label for="rate">Rate:</label>
+        <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1"/>
+
+        <label for="pitch">Pitch:</label>
+        <input type="range" id="pitch" min="0" max="2" step="0.1" value="1"/>
+
+        <button id="speakButton">Speak</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

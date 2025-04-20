@@ -27,20 +27,24 @@ function loadVoices() {
   });
 }
 
-// Preview a short sample
+// Preview on hover only
 function previewVoice(index = voiceSelect.value) {
   const utt = new SpeechSynthesisUtterance('Previewing voice.');
   const voices = speechSynthesis.getVoices();
   if (voices[index]) utt.voice = voices[index];
-  utt.rate = 1; utt.pitch = 1;
+  utt.rate = 1;
+  utt.pitch = 1;
   speechSynthesis.cancel();
   speechSynthesis.speak(utt);
 }
 
-// Speak full text
+// Speak full text (with cancel to stop any preview)
 function speakText() {
   const text = textInput.value.trim();
   if (!text) return;
+  // 👉 Cancel any preview or prior speech
+  speechSynthesis.cancel();
+
   const utt = new SpeechSynthesisUtterance(text);
   const voices = speechSynthesis.getVoices();
   const idx = voiceSelect.value;
@@ -51,7 +55,7 @@ function speakText() {
 }
 
 // Events
-voiceSelect.addEventListener('change', previewVoice);
+// voiceSelect.addEventListener('change', previewVoice); // <-- remove this
 voiceSelect.addEventListener('mouseover', e => {
   if (e.target.tagName === 'OPTION') previewVoice(e.target.value);
 });
@@ -60,7 +64,13 @@ speakButton.addEventListener('click', speakText);
 // Init
 speechSynthesis.onvoiceschanged = loadVoices;
 particlesJS("particles-js", {
-  particles: { number:{value:60}, color:{value:"#fff"}, shape:{type:"circle"},
-               opacity:{value:0.5}, size:{value:3}, move:{enable:true,speed:2} },
-  interactivity:{ events:{ onhover:{enable:true,mode:"repulse"} } }
+  particles: {
+    number: { value: 60 },
+    color: { value: "#fff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.5 },
+    size: { value: 3 },
+    move: { enable: true, speed: 2 }
+  },
+  interactivity: { events: { onhover: { enable: true, mode: "repulse" } } }
 });
